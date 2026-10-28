@@ -1,6 +1,6 @@
 from typing import List
 
-from sqlalchemy import ForeignKey, Integer, String
+from sqlalchemy import ForeignKey, Integer, String, DateTime
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from database import Base
@@ -27,6 +27,8 @@ class Lavagem(Base):
     __tablename__ = "lavagens"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
-    titulo: Mapped[str] = mapped_column(String, nullable=False, unique=True)
-    user_id: Mapped[int] = mapped_column(Integer, ForeignKey("funcionarios.id"), nullable=False)
-    user: Mapped["Funcionario"] = relationship("User", back_populates="Lavagem")
+    tipo: Mapped[str] = mapped_column(String, nullable=False)
+    nome_veiculo: Mapped[str] = mapped_column(String(40))
+    data: Mapped[DateTime] = mapped_column(DateTime)
+    cliente: Mapped['Cliente'] = relationship('Cliente', back_populates='lavagens')
+    funcionarios: Mapped['Funcionario'] = relationship('Funcionario', back_populates='lavagens')
