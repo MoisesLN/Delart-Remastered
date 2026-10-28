@@ -1,10 +1,6 @@
 from flask import Blueprint, render_template
 
-cliente_bp = Blueprint(
-    "cliente",
-    __name__,
-    url_prefix="/clientes"
-)
+cliente_bp = Blueprint("cliente",__name__, url_prefix="/clientes")
 
 
 @cliente_bp.route("/")
