@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block titulo %}Funcionários{% endblock %}
+
+{% block conteudo %}
+<h1>Funcionários</h1>
+
+<p><a class="botao" href="{{ url_for('funcionario.novo') }}">Cadastrar funcionário</a></p>
+
+{% if funcionarios %}
+<table>
+    <tr>
+        <th>Nome</th>
+        <th>E-mail</th>
+    </tr>
+    {% for funcionario in funcionarios %}
+    <tr>
+        <td>{{ funcionario.nome }}</td>
+        <td>{{ funcionario.email }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>Nenhum funcionário cadastrado.</p>
+{% endif %}
+{% endblock %}
