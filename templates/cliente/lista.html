@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block titulo %}Clientes{% endblock %}
+
+{% block conteudo %}
+<h1>Clientes</h1>
+
+<p><a class="botao" href="{{ url_for('cliente.novo') }}">Cadastrar cliente</a></p>
+
+{% if clientes %}
+<table>
+    <tr>
+        <th>Nome</th>
+        <th>E-mail</th>
+    </tr>
+    {% for cliente in clientes %}
+    <tr>
+        <td>{{ cliente.nome }}</td>
+        <td>{{ cliente.email }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>Nenhum cliente cadastrado.</p>
+{% endif %}
+{% endblock %}
