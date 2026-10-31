@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block titulo %}Lavagens{% endblock %}
+
+{% block conteudo %}
+<h1>Lavagens</h1>
+
+<p><a class="botao" href="{{ url_for('lavagem.nova') }}">Agendar lavagem</a></p>
+
+{% if lavagens %}
+<table>
+    <tr>
+        <th>Tipo</th>
+        <th>Veículo</th>
+        <th>Data</th>
+        <th>Cliente</th>
+    </tr>
+    {% for lavagem in lavagens %}
+    <tr>
+        <td>{{ lavagem.tipo }}</td>
+        <td>{{ lavagem.nome_veiculo }}</td>
+        <td>{{ lavagem.data }}</td>
+        <td>{{ lavagem.cliente.nome }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>Nenhuma lavagem cadastrada.</p>
+{% endif %}
+{% endblock %}

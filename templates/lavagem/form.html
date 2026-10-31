@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block titulo %}Nova lavagem{% endblock %}
+
+{% block conteudo %}
+<h1>Agendar lavagem</h1>
+
+<form method="post">
+    <label for="tipo">Tipo de lavagem:</label>
+    <input id="tipo" name="tipo" type="text" required>
+
+    <label for="nome_veiculo">Veículo:</label>
+    <input id="nome_veiculo" name="nome_veiculo" type="text">
+
+    <label for="data">Data e horário:</label>
+    <input id="data" name="data" type="datetime-local" required>
+
+    <label for="cliente_id">Cliente:</label>
+    <select id="cliente_id" name="cliente_id" required>
+        {% for cliente in clientes %}
+        <option value="{{ cliente.id }}">{{ cliente.nome }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="funcionarios_ids">Funcionários:</label>
+    <select id="funcionarios_ids" name="funcionarios_ids" multiple>
+        {% for funcionario in funcionarios %}
+        <option value="{{ funcionario.id }}">{{ funcionario.nome }}</option>
+        {% endfor %}
+    </select>
+    <p>Para escolher mais de um, segure Ctrl enquanto seleciona.</p>
+
+    <button type="submit">Salvar</button>
+</form>
+
+<p><a href="{{ url_for('lavagem.listar') }}">Voltar</a></p>
+{% endblock %}
