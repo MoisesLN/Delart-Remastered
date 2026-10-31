@@ -12,7 +12,7 @@ class Cliente(Base):
     nome: Mapped[str] = mapped_column(String, nullable=False)
     email: Mapped[str] = mapped_column(String(120), unique=True, nullable=False)
     senha: Mapped[str] = mapped_column(String(120), nullable=False)
-    lavagens: Mapped[List["Lavagem"]] = relationship("Lavagem", back_populates="clientes")
+    lavagens: Mapped[List["Lavagem"]] = relationship("Lavagem", back_populates="cliente")
 
 class Funcionario(Base):
     __tablename__ = "funcionarios"
@@ -21,7 +21,7 @@ class Funcionario(Base):
     nome: Mapped[str] = mapped_column(String, nullable=False)
     email: Mapped[str] = mapped_column(String(120), unique=True, nullable=False)
     senha: Mapped[str] = mapped_column(String(120), nullable=False)
-    lavagens: Mapped[List["Lavagem"]] = relationship("Lavagem", back_populates="funcionarios")
+    lavagens: Mapped[List["Lavagem"]] = relationship("Lavagem", back_populates="funcionario")
 
 class Lavagem(Base):
     __tablename__ = "lavagens"
@@ -30,5 +30,7 @@ class Lavagem(Base):
     tipo: Mapped[str] = mapped_column(String, nullable=False)
     nome_veiculo: Mapped[str] = mapped_column(String(40))
     data: Mapped[DateTime] = mapped_column(DateTime)
+    cliente_id: Mapped[int] = mapped_column(ForeignKey("clientes.id"), nullable=False)
+    funcionario_id: Mapped[int] = mapped_column(ForeignKey("funcionarios.id"), nullable=False)
     cliente: Mapped['Cliente'] = relationship('Cliente', back_populates='lavagens')
-    funcionarios: Mapped['Funcionario'] = relationship('Funcionario', back_populates='lavagens')
+    funcionario: Mapped['Funcionario'] = relationship('Funcionario', back_populates='lavagens')
