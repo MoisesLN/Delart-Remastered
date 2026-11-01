@@ -23,7 +23,7 @@
     </select>
 
     <label for="funcionarios_ids">Funcionários:</label>
-    <select id="funcionarios_ids" name="funcionarios_ids" multiple>
+    <select id="funcionarios_ids" name="funcionarios_ids" multiple required>
         {% for funcionario in funcionarios %}
         <option value="{{ funcionario.id }}">{{ funcionario.nome }}</option>
         {% endfor %}
